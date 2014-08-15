@@ -1,35 +1,20 @@
----
-title: 'Reproducible Research: Peer Assessment 1'
-author: "Chris Ramsey"
-date: "Friday, August 15, 2014"
-output: html_document
----
+# Reproducible Research: Peer Assessment 1
+Chris Ramsey  
+Friday, August 15, 2014  
 
 ### Basic settings
 
 ```r
 echo = TRUE  # Always make code visible
-options(scipen = 1)  # Turn off scientific notations for numbers
 ```
 
 ### Loading and processing the data
 
 ```r
 activity <- read.csv("activity.csv", colClasses = c("integer", "Date", "factor"));
-activity$month <- as.numeric(format(data$date,"%m"));
-```
-
-```
-## Error: object of type 'closure' is not subsettable
-```
-
-```r
+activity$month <- as.numeric(format(activity$date,"%m"));
 activityComplete <-na.omit(activity);
 library(ggplot2)
-```
-
-```
-## Error: there is no package called 'ggplot2'
 ```
 
 ### What is mean total number of steps taken per day?
@@ -40,9 +25,7 @@ library(ggplot2)
 ggplot(activityComplete, aes(date, steps)) + geom_bar(stat = "identity", colour = "#663399", fill = "#663399", width = .8) + facet_grid(. ~ month, scales = "free") + labs(title = "Histogram of Total Number of Steps Taken Each Day", x = "Date", y = "Total number of steps");
 ```
 
-```
-## Error: could not find function "ggplot"
-```
+![plot of chunk unnamed-chunk-3](./PA1_template_files/figure-html/unnamed-chunk-3.png) 
 
 * Calculate/report mean and median of steps/day
 Mean total number of steps taken per day:
@@ -75,9 +58,7 @@ names(activityAvgSteps)[2] <- "stepmean";
 ggplot(activityAvgSteps, aes(interval, stepmean)) + geom_line(color = "#663399", size = 0.8) + labs(title = "Time Series Plot of the 5-minute Interval", x = "5-minute intervals", y = "Average Number of Steps Taken");
 ```
 
-```
-## Error: could not find function "ggplot"
-```
+![plot of chunk unnamed-chunk-6](./PA1_template_files/figure-html/unnamed-chunk-6.png) 
 * Which 5 min interval contains the maximum number of steps?
 
 ```r
@@ -113,13 +94,13 @@ head(filledActData)
 ```
 
 ```
-##     steps       date interval
-## 1 1.71698 2012-10-01        0
-## 2 0.33962 2012-10-01        5
-## 3 0.13208 2012-10-01       10
-## 4 0.15094 2012-10-01       15
-## 5 0.07547 2012-10-01       20
-## 6 2.09434 2012-10-01       25
+##     steps       date interval month
+## 1 1.71698 2012-10-01        0    10
+## 2 0.33962 2012-10-01        5    10
+## 3 0.13208 2012-10-01       10    10
+## 4 0.15094 2012-10-01       15    10
+## 5 0.07547 2012-10-01       20    10
+## 6 2.09434 2012-10-01       25    10
 ```
 
 ```r
@@ -136,9 +117,7 @@ sum(is.na(filledActData))
 ggplot(filledActData, aes(date, steps)) + geom_bar(stat = "identity", colour = "#663399", fill = "#663399", width = 0.7) + facet_grid(. ~ month, scales = "free") + labs(title = "Histogram of Total Number of Steps Taken Each Day (no missing data)", x = "Date", y = "Total number of steps");
 ```
 
-```
-## Error: could not find function "ggplot"
-```
+![plot of chunk unnamed-chunk-10](./PA1_template_files/figure-html/unnamed-chunk-10.png) 
 
 Mean total steps/day:
 
@@ -192,13 +171,13 @@ head(filledActData)
 ```
 
 ```
-##     steps       date interval
-## 1 1.71698 2012-10-01        0
-## 2 0.33962 2012-10-01        5
-## 3 0.13208 2012-10-01       10
-## 4 0.15094 2012-10-01       15
-## 5 0.07547 2012-10-01       20
-## 6 2.09434 2012-10-01       25
+##     steps       date interval month
+## 1 1.71698 2012-10-01        0    10
+## 2 0.33962 2012-10-01        5    10
+## 3 0.13208 2012-10-01       10    10
+## 4 0.15094 2012-10-01       15    10
+## 5 0.07547 2012-10-01       20    10
+## 6 2.09434 2012-10-01       25    10
 ```
 
 ```r
@@ -246,4 +225,4 @@ xyplot(averageSteps$meanOfSteps ~ averageSteps$interval | averageSteps$weekdays,
        xlab = "Interval", ylab = "Number of steps")
 ```
 
-![plot of chunk unnamed-chunk-15](figure/unnamed-chunk-15.png) 
+![plot of chunk unnamed-chunk-15](./PA1_template_files/figure-html/unnamed-chunk-15.png) 

@@ -1,13 +1,21 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
+title: 'Reproducible Research: Peer Assessment 1'
 author: "Chris Ramsey"
 date: "Friday, August 15, 2014"
-output: html_document
+output:
+  html_document:
+    keep_md: yes
 ---
+
+### Basic settings
+```{r}
+echo = TRUE  # Always make code visible
+```
+
 ### Loading and processing the data
 ```{r}
 activity <- read.csv("activity.csv", colClasses = c("integer", "Date", "factor"));
-activity$month <- as.numeric(format(data$date,"%m"));
+activity$month <- as.numeric(format(activity$date,"%m"));
 activityComplete <-na.omit(activity);
 library(ggplot2)
 ```
